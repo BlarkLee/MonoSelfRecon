@@ -1,5 +1,5 @@
 # MonoSelfRecon: Purely Self-Supervised Explicit Generalizable 3D Reconstruction of Indoor Scenes from Monocular RGB Views
-This is the code implementation of MonoSelfRecon. https://openaccess.thecvf.com/content/CVPR2024W/3DMV/papers/Li_MonoSelfRecon_Purely_Self-Supervised_Explicit_Generalizable_3D_Reconstruction_of_Indoor_Scenes_CVPRW_2024_paper.pdf or arxiv
+This is the code implementation for MonoSelfRecon. https://openaccess.thecvf.com/content/CVPR2024W/3DMV/papers/Li_MonoSelfRecon_Purely_Self-Supervised_Explicit_Generalizable_3D_Reconstruction_of_Indoor_Scenes_CVPRW_2024_paper.pdf or arxiv
 https://arxiv.org/pdf/2404.06753
 
 ## Prepare Environments
