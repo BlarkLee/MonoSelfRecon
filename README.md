@@ -4,22 +4,27 @@ https://arxiv.org/pdf/2404.06753
 
 ## Prepare Environments
 ## Prepare Dataset
+We use ScanNet standard training and testing split, as Atlas and NeuralRecon. Please
 
 ## Train
-
+Train with two GPUs
 ```
 CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 main.py --cfg ./config/train.yaml
 ```
+You can also download our pretrained checkpoints from https://drive.google.com/drive/folders/1MG91GdkYn1Almryek6ehd5kgeHJDviOp?usp=drive_link. `ckpt_fragloss_att` is the purely self-supervision, `ckpt_fragloss_att_gru_semi` is the weak supervision. Put the two folders both at the project root directory.
 
 ## Evaluation
+This step will generate mesh files for every scene and save at `./results`. You can use our pretrained checkpoints or the one trained by yourself.
 ```
 python main.py --cfg ./config/test.yaml
 ```
+Or you can skip this step and download the mesh files we generated for all scenes from https://drive.google.com/drive/folders/1MG91GdkYn1Almryek6ehd5kgeHJDviOp?usp=drive_link and directly evaluate it. Unzip `scene_scannet_allfrag_ckpt_fragloss_att_fusion_eval_28.zip` and `scene_scannet_allfrag_ckpt_fragloss_att_gru_semi_fusion_eval_20.zip`, put them under `./result`
 
+To evaluate the purely self-supervised training, use
 ```
 python tools/evaluation.py --model ./results/scene_scannet_allfrag_ckpt_fragloss_att_fusion_eval_28 --n_proc 16
 ```
-
+To evaluate the weakly-supervised training, use
 ```
 python tools/evaluation.py --model ./results/scene_scannet_allfrag_ckpt_fragloss_att_gru_semi_fusion_eval_20 --n_proc 16
 ```
