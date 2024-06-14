@@ -1,0 +1,14 @@
+ray
+transforms3d
+tqdm
+opencv-python
+# pycuda
+tensorboardX
+scikit-image
+trimesh~=3.9.18
+yacs
+h5py
+loguru
+pyrender~=0.1.45
+pyglet
+open3d # for tsdf fusion in evaluation

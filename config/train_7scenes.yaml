@@ -1,0 +1,91 @@
+DATASET: 'sevenscenes_allfrag'
+BATCH_SIZE: 1
+SAVE_SCENE_MESH: False
+LOGDIR: 'ckpt_7scenes_pumpkin' 
+SAVE_FREQ: 1
+MODE: 'train'
+
+TRAIN:
+  PATH: '/hdd1/7scene/pumpkin'
+  EPOCHS: 50 #25
+  N_VIEWS: 9
+  LR: 1e-5
+  N_WORKERS: 1
+  LREPOCHS: '12,24,48:2'
+  near: 0.0
+  far: 2.0
+
+TEST:
+  PATH: '/hdd1/7scene/pumpkin'
+  N_VIEWS: 9
+  N_WORKERS: 1
+  near: 0.0
+  far: 2.0
+
+MODEL:
+  N_LAYER: 3
+  N_VOX: [96, 96, 96]
+  VOXEL_SIZE: 0.05
+  TRAIN_NUM_SAMPLE: [4096, 16384, 65536]
+  TEST_NUM_SAMPLE: [4096, 16384, 65536]
+
+  BACKBONE2D:
+    ARC: 'fpn-mnas-1'
+
+  FUSION:
+    FUSION_ON: True #False
+    HIDDEN_DIM: 64
+
+    AVERAGE: False
+    FULL: True #False
+
+  LW: [1.0, 0.8, 0.64]
+
+  THRESHOLDS: [0, 0, 0]
+  POS_WEIGHT: 1.5
+  
+  #MPINerf
+  disparity_end: 0.3 #0.2 #0.3 #0.001
+  disparity_start: 2.0 #20 #2.0
+  is_bg_depth_inf: false
+  num_bins_coarse: 32
+  num_bins_fine: 0
+  valid_mask_threshold: 2
+  fix_disparity: false
+  use_alpha: false 
+  
+  # SDFNerfNet
+  net_width: 256
+  feature_width: 26 #256
+  bounding_radius: 2.0
+  sdf:
+      geometric_init: True
+      radius_init: 1.0
+      net_depth: 8
+      skips: [4]
+      fr_pos: 6
+      weight_norm: True
+  radiance:
+      net_depth: 4
+      skips: []
+      fr_pos: -1
+      fr_view: -1
+      weight_norm: True
+  semantic:
+      net_depth: 4
+      skips: []
+      fr_pos: -1
+      fr_view: -1
+      weight_norm: True
+  beta_init: 0.1
+  speed_factor: 10.0
+  
+sample:
+    N_samples: 128
+    N_importance: 64
+    rayschunk: 65536
+    netchunk: 1048576
+    max_upsample_steps: 6
+    max_bisection_steps: 10
+    epsilon: 0.1
+  
